@@ -50,3 +50,25 @@ class DFS{
         }
     }
 }
+// otherway
+
+class Solution {
+    // Function to return a list containing the DFS traversal of the graph.
+    public ArrayList<Integer> dfsOfGraph(ArrayList<ArrayList<Integer>> adj) {
+        int n = adj.size();
+        ArrayList<Integer> ans = new ArrayList<>();
+        int[] vis = new int[n+1];
+        return dfs(adj,ans,vis,0);
+    }
+    public ArrayList<Integer> dfs(ArrayList<ArrayList<Integer>> adj,ArrayList<Integer> ans ,int[] vis, int node){
+        vis[node] = 1;
+        ans.add(node);
+        
+        for(int i = 0; i < adj.get(node).size(); i++){
+            if( vis[adj.get(node).get(i)] == 0){
+                dfs(adj,ans,vis,adj.get(node).get(i));
+            }
+        }
+        return ans;
+    }
+}
