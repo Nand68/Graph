@@ -55,3 +55,30 @@ class BFS{
         }
     }
 }
+
+
+// otherway
+
+class Solution {
+    // Function to return Breadth First Traversal of given graph.
+    public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+         ArrayList<Integer> bfs = new  ArrayList<>();
+         int[] vis = new int[V];
+         vis[0] = 1;
+         Queue<Integer> queue = new LinkedList<>();
+         queue.add(0);
+         while (!queue.isEmpty()){
+             int node = queue.poll();
+             bfs.add(node);
+             int n = adj.get(node).size();
+             
+             for(int i = 0; i < n; i++){
+                 if(vis[adj.get(node).get(i)] == 0){
+                     vis[adj.get(node).get(i)] = 1;
+                     queue.add(adj.get(node).get(i));
+                 }
+             }
+         }
+         return bfs;
+    }
+}
