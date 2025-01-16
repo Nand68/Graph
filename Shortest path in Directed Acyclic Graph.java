@@ -12,8 +12,14 @@ class Solution {
 
     public int[] shortestPath(int v, int e, int[][] edges) {
         // Step1 --> prepare adjacency list using edges and weight
-        List<List<Edge>> adjacencyList = prepareDAG(v, edges);
+        List<List<Edge>> adjacencyList = new ArrayList<>();
+        for (int i = 0; i < v; i++) {
+            adjacencyList.add(new ArrayList<>());
+        }
 
+        for (int i = 0; i < edges.length; i++) {
+            adjacencyList.get(edges[i][0]).add(new Edge(edges[i][1], edges[i][2]));
+        }
         // step2 --> Do Topo Sort using DFS
         boolean[] visited = new boolean[v];
         Stack<Integer> nodeStack = new Stack<>();
@@ -60,17 +66,5 @@ class Solution {
             }
         }
         nodeStack.push(currNode);
-    }
-
-    private List<List<Edge>> prepareDAG(int v, int[][] edges) {
-        List<List<Edge>> adjacencyList = new ArrayList<>();
-        for (int i = 0; i < v; i++) {
-            adjacencyList.add(new ArrayList<>());
-        }
-
-        for (int i = 0; i < edges.length; i++) {
-            adjacencyList.get(edges[i][0]).add(new Edge(edges[i][1], edges[i][2]));
-        }
-        return adjacencyList;
     }
 }
